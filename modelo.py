@@ -10,8 +10,9 @@ def criar_tabela():
         CREATE TABLE IF NOT EXISTS produtos (
             id INTEGER PRIMARY KEY AUTOINCREMENT
             produto TEXT NOT NULL,
-            quantidade INTEGER,
-            preco FLOAT
+            preco FLOAT,
+            quantidade INTEGER
+            
            )
                    
         """)
@@ -19,20 +20,53 @@ def criar_tabela():
     conexao.close()
 
 def inserir_produto(nome, preco, quantidade):
-    conexao = conectar()
-    cursor = conexao.cursor()
+    try:
+        produto = input("Digite o nome do produto: ").strip()
+        preco = input("Digite o preço do produto : ").strip()
+        quantidade = input(int("Digite o preço do produto : "))
 
-    sql = "INSERT INTO produtos (nome, quantidade , preco) VALUES (?, ?, ?)"
+        if not produto or not preco and not preco :
+            print("❌ ERRO: Campos não podem ficar em branco .")
 
-    cursor.execute(sql, (nome, preco, quantida))
+        conexao = conectar()
+        cursor = conexao.cursor()
 
-    conexao.commit()
-    conexao.close()
+        sql = "INSERT INTO produtos (nome, quantidade , preco) VALUES (?, ?, ?)"
 
-    pass
+        cursor.execute(sql, (nome, preco, quantidade))
+
+        conexao.commit()
+        conexao.close()
+
+        if cursor.rowcount == 0:
+            print("Produto não foi adicionado no estoque !")
+        
+        else:
+            print("Produto adicionado com sucesso ao estoque !")
+
+    except sqlite3.Error as erro:
+        print(f"ERRO : {erro}")
+
+    finally:
+        if conexao:
+            conexao.close()
+
+    
 def buscar_produto():
+    try:
+        print(" ---- LISTA DE PRODUTOS EM ESTOQUE ---- ")
+        conexao = conectar()
+        cursor = conexao.cursor()
 
-    pass
+        cursor.execute("SELECT * FROM produtos ")
+        resultados = cursor.fetchall()
+
+        if len(resultados) ==0:
+            print("Não há produtos cadastrados .")
+            
+        else:
+            for produto in produtos:
+                print(f"ID : {produto[0]} | Produto: {produto[1]} | ")
 
 def atualizar_preco(id_produto,novo_produto):
 

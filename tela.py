@@ -1,8 +1,6 @@
 import customtkinter as ctk
 from controlador import conectar, salvar_dados, processar_cadastro
 
-
-
 janela = ctk.CTk()
 
 janela.geometry("600x600")
@@ -36,9 +34,5 @@ def salvar_dados():
 btn_salvar = ctk.CTkButton(janela, text= "Salvar",command=salvar_dados)
 btn_salvar.pack(pady=20)
 
-lbl_mensagem = ctk.CTklabel(janela, text="Salvo com sucesso !")
+lbl_mensagem = ctk.CTkLabel(janela, text="")
 lbl_mensagem.pack()
-
-
-
-janela.mainloop()
