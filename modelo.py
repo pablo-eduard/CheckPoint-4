@@ -51,7 +51,6 @@ def inserir_produto(nome, preco, quantidade):
         if conexao:
             conexao.close()
 
-    
 def buscar_produto():
     try:
         print(" ---- LISTA DE PRODUTOS EM ESTOQUE ---- ")
@@ -65,16 +64,15 @@ def buscar_produto():
             print("Não há produtos cadastrados .")
             
         else:
-            for produto in produtos:
-                print(f"ID : {produto[0]} | Produto: {produto[1]} | ")
+            for produto in produto :
+                print(f"ID : {produto[0]} | Produto: {produto[1]} | Preço : R$ {produto[2]} | Quantidade : {produto[3]}")
 
-def atualizar_preco(id_produto,novo_produto):
+    except sqlite3.Error as erro:
+        print(f"❌ Erro: {erro}")
 
-    pass
-
-def deletar_produto(id_produto):
-
-    pass
-
-
-criar_tabela()
+    finally:
+        if conexao:
+            conexao.close()
+            
+if __name__ == "__main__":
+    buscar_produto()
