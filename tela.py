@@ -3,8 +3,10 @@ from controlador import conectar, salvar_dados, processar_cadastro
 
 janela = ctk.CTk()
 
-janela.geometry("600x600")
+janela.geometry("1280x720")
 janela.title("Controle de Estoque")
+
+
 
 lbl_titulo = ctk.CTkLabel ( janela, text= "Adicionar novo produto : ")
 lbl_titulo.pack(pady= 10)
