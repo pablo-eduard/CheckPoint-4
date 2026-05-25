@@ -76,6 +76,3 @@ def deletar_produto(id_produto):
     except sqlite3.Error as erro:
         print(f"❌ Erro: {erro}")
         return False
-
-
-criar_tabela()
